@@ -1,7 +1,7 @@
 # city-explorer
 
 **Author**: Jessi Velazquez
-**Version**: 1.0.0 
+**Version**: 1.1.0 
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
@@ -21,3 +21,13 @@ This is an app developed for users who want to quickly view a map of a city of t
 
 ## Credit and Collaborations
 Data flow diagram co-developed with Peter Staker.
+
+Name of feature: Search form submit, render map and location data from API
+
+Estimate of time needed to complete: 5 hours
+
+Start time: 1:00pm
+
+Finish time: 9:30pm
+
+Actual time needed to complete: 8.5 hours
