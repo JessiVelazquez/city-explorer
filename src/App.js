@@ -3,6 +3,8 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Map from './map.js';
+import Error from './error.js';
 // import './App.css';
 
 class App extends React.Component{
@@ -49,8 +51,7 @@ class App extends React.Component{
         <h1>Welcome</h1>
         {this.state.hasError ?
           <>
-            <h1>There was an error!</h1>
-            <p>{this.state.hasError.message}</p>
+            <Error handleError={this.state.hasError}></Error>
           </> :
           <Card bg='dark' text='white' style={{ width: '22rem' }}>
             <Card.Body>
@@ -62,7 +63,7 @@ class App extends React.Component{
                 long: {this.state.location.lon}
               </Card.Text>
             </Card.Body>
-            <Card.Img variant="top" src={this.state.imgSrc} />
+            <Map imageSrc={this.state.imgSrc}/>
           </Card> 
         }
       </>
