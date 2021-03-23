@@ -12,38 +12,47 @@ class App extends React.Component{
       location:{},
       searchQuery: '',
       imgSrc: '',
-      displayResults: false
+      displayResults: true,
+      hasError: null,
     }
   }
-
+  
   getLocationInfo = async(e) => {
+
     e.preventDefault();
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${this.state.searchQuery}&format=json`;
-    const location = await axios.get(url);
-    const locationArray = location.data;
-
-    this.setState({
-      location: locationArray[0],
-      displayResults: true,
-      imgSrc: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${locationArray[0].lat},${locationArray[0].lon}&zoom=13` 
-    });
+    await axios.get(url)
+    .then((location) => {
+      const locationArray = location.data;
+      this.setState({
+        location: locationArray[0],
+        displayResults: true,
+        imgSrc: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${locationArray[0].lat},${locationArray[0].lon}&zoom=13` 
+      });
+    }) 
+    .catch(error => {
+      console.log(error);
+      this.setState({ hasError: error });
+    })
   }
-
+  
 
   render(){
-    console.log('state', this.state)
-    console.log(this.state.location)
+      
     return(
       <>
-        <form onSubmit={this.getLocationInfo} >
+        <form onSubmit={this.getLocationInfo}>
           <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="city"/>
           <Button type="submit">Explore!</Button>
         
         </form>
         <h1>Welcome</h1>
-
-        {this.state.displayResults &&
-          <Card style={{ width: '22rem' }}>
+        {this.state.hasError ?
+          <>
+            <h1>There was an error!</h1>
+            <p>{this.state.hasError.message}</p>
+          </> :
+          <Card bg='dark' text='white' style={{ width: '22rem' }}>
             <Card.Body>
               <Card.Title>{this.state.location.display_name}</Card.Title>
               <Card.Text>
@@ -54,7 +63,7 @@ class App extends React.Component{
               </Card.Text>
             </Card.Body>
             <Card.Img variant="top" src={this.state.imgSrc} />
-          </Card>
+          </Card> 
         }
       </>
     );
