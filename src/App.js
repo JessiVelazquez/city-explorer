@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Map from './map.js';
 import Error from './error.js';
+import Forecast from './forecast.js';
 // import './App.css';
 
 class App extends React.Component{
@@ -41,30 +42,35 @@ class App extends React.Component{
 
   render(){
       
+
     return(
       <>
+        <h1>City Explorer</h1>
         <form onSubmit={this.getLocationInfo}>
-          <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="city"/>
+          <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="enter a city"/>
           <Button type="submit">Explore!</Button>
-        
         </form>
-        <h1>Welcome</h1>
+        <div>
+          <p></p>
+        </div>
         {this.state.hasError ?
           <>
             <Error handleError={this.state.hasError}></Error>
           </> :
           <Card bg='dark' text='white' style={{ width: '22rem' }}>
-            <Card.Body>
-              <Card.Title>{this.state.location.display_name}</Card.Title>
-              <Card.Text>
-                lat: {this.state.location.lat}
-              </Card.Text>
-              <Card.Text>
-                long: {this.state.location.lon}
-              </Card.Text>
-            </Card.Body>
-            <Map imageSrc={this.state.imgSrc}/>
-          </Card> 
+          <Card.Body>
+            <Card.Title>{this.state.location.display_name}</Card.Title>
+            <Card.Text>
+              lat: {this.state.location.lat}
+            </Card.Text>
+            <Card.Text>
+              long: {this.state.location.lon}
+            </Card.Text>
+            <Forecast/>
+          </Card.Body>
+          <Map imageSrc={this.state.imgSrc}/>
+        </Card>
+          
         }
       </>
     );
