@@ -15,7 +15,7 @@ class App extends React.Component{
       location:{},
       searchQuery: '',
       imgSrc: '',
-      displayResults: true,
+      displayResults: false,
       hasError: null,
     }
   }
@@ -30,12 +30,14 @@ class App extends React.Component{
       this.setState({
         location: locationArray[0],
         displayResults: true,
+        hasError: null,
         imgSrc: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${locationArray[0].lat},${locationArray[0].lon}&zoom=13` 
       });
     }) 
     .catch(error => {
       console.log(error);
-      this.setState({ hasError: error });
+      this.setState({ hasError: error })
+      this.setState({ displayResults: false });
     })
   }
   
@@ -53,25 +55,27 @@ class App extends React.Component{
         <div>
           <p></p>
         </div>
-        {this.state.hasError ?
+        {this.state.displayResults &&
+          <Card bg='dark' text='white' style={{ width: '22rem' }}>
+            <Card.Body>
+              <Card.Title>{this.state.location.display_name}</Card.Title>
+              <Card.Text>
+                lat: {this.state.location.lat}
+              </Card.Text>
+              <Card.Text>
+                long: {this.state.location.lon}
+              </Card.Text>
+              <Forecast/>
+            </Card.Body>
+            <Map imageSrc={this.state.imgSrc}/>
+          </Card>
+        }
+        {this.state.hasError &&
           <>
             <Error handleError={this.state.hasError}></Error>
-          </> :
-          <Card bg='dark' text='white' style={{ width: '22rem' }}>
-          <Card.Body>
-            <Card.Title>{this.state.location.display_name}</Card.Title>
-            <Card.Text>
-              lat: {this.state.location.lat}
-            </Card.Text>
-            <Card.Text>
-              long: {this.state.location.lon}
-            </Card.Text>
-            <Forecast/>
-          </Card.Body>
-          <Map imageSrc={this.state.imgSrc}/>
-        </Card>
-          
-        }
+          </>
+        }  
+        
       </>
     );
   }
