@@ -23,11 +23,11 @@ class App extends React.Component{
   }
 
   getWeatherInfo = async(e) => {
-    // const SERVER = 'https://jessi301d72cityexplorerapi.herokuapp.com/';
-    const SERVER = 'http://localhost:3001';
-    const forecast = await axios.get(`${SERVER}/weather?city_name=${this.state.searchQuery}`);
+    // const SERVER = 'http://localhost:3001';
+    // const SERVER = https://jessi301d72cityexplorerapi.herokuapp.com
+    console.log('forecastArray');
+    const forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.searchQuery}`);
     const forecastArray = forecast.data;
-    console.log(forecastArray);
     this.setState({ weatherForecast: forecastArray });
   }
   
@@ -37,20 +37,20 @@ class App extends React.Component{
     await axios.get(url)
     .then((location) => {
       const locationArray = location.data;
-      console.log(locationArray[0]);
       this.setState({
         location: locationArray[0],
         displayResults: true,
         hasError: null,
         imgSrc: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${locationArray[0].lat},${locationArray[0].lon}&zoom=13` 
       });
-      this.getWeatherInfo();
     }) 
     .catch(error => {
       console.log(error);
       this.setState({ hasError: error })
       this.setState({ displayResults: false });
     })
+    this.getWeatherInfo();
+    console.log('loc');
   }
   
 
