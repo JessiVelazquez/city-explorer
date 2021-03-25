@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+
 
 class Forecast extends React.Component {
   constructor(props){
@@ -11,13 +11,6 @@ class Forecast extends React.Component {
 
   componentDidMount = async() => {
     await this.props.getWeatherInfo();
-    // // const SERVER = 'https://jessi301d72cityexplorerapi.herokuapp.com';
-    // const SERVER = 'http://localhost:3001';
-    // console.log(this.props.city);
-    // const forecast = await axios.get(`${SERVER}/weather?city_name=${this.props.city}`);
-    // const forecastArray = forecast.data;
-    // console.log(forecastArray);
-    // this.setState({ weatherForecast: forecastArray });
   }
 
 
@@ -31,7 +24,6 @@ class Forecast extends React.Component {
       <>
         {this.forecastRender()}
       </>
-
     )
   }
 }
