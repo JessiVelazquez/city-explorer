@@ -33,7 +33,6 @@ class App extends React.Component{
   
   async getLocationInfo(e) {
     e.preventDefault();
-    console.log('hello');
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${this.state.searchQuery}&format=json`;
     await axios.get(url)
     .then((location) => {
@@ -54,10 +53,6 @@ class App extends React.Component{
     })
   }
   
-  function(e) {
-    e.preventDefault();
-    console.log('hi')
-  }
 
   render(){
       console.log('string');
