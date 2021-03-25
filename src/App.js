@@ -23,8 +23,8 @@ class App extends React.Component{
   }
 
   getWeatherInfo = async(e) => {
-    const SERVER = 'https://jessi301d72cityexplorerapi.herokuapp.com/';
-    // const SERVER = 'http://localhost:3001';
+    // const SERVER = 'https://jessi301d72cityexplorerapi.herokuapp.com/';
+    const SERVER = 'http://localhost:3001';
     const forecast = await axios.get(`${SERVER}/weather?city_name=${this.state.searchQuery}`);
     const forecastArray = forecast.data;
     console.log(forecastArray);
