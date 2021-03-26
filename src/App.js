@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Map from './map.js';
 import Error from './error.js';
 import Weather from './Weather.js';
+import Movies from './Movies.js';
 import './App.css';
 
 //Component Class
@@ -19,6 +20,7 @@ class App extends React.Component{
       displayResults: false,
       hasError: null,
       weatherForecast:[],
+      movie:[],
     }
     this.getLocationInfo = this.getLocationInfo.bind(this);
   }
@@ -27,6 +29,13 @@ class App extends React.Component{
     const forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.searchQuery}`);
     const forecastArray = forecast.data;
     this.setState({ weatherForecast: forecastArray });
+  }
+
+  getMovieInfo = async(e) => {
+    const movie = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${this.state.searchQuery}`);
+    console.log('mov', movie);
+    const movieArray = movie.data;
+    this.setState({ movie: movieArray });
   }
   
   async getLocationInfo(e) {
@@ -74,7 +83,8 @@ class App extends React.Component{
               <Card.Text>
                 long: {this.state.location.lon}
               </Card.Text>
-              <Weather weatherForecast={this.state.weatherForecast} getWeatherInfo={this.getWeatherInfo}/>
+              <Movies movie={this.state.movie} getMovieInfo={this.getMovieInfo}/>
+              <Weather className="cardstuff"  style={{ width: '19.1rem' }} weatherForecast={this.state.weatherForecast} getWeatherInfo={this.getWeatherInfo}/>
             </Card.Body>
           </Card>
           <footer id="title">
