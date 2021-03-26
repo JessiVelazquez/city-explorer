@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class WeatherDay extends React.Component {
 
 
-  componentDidMount = async() => {
+  componentDidMount = async () => {
     await this.props.getWeatherInfo();
   }
 
@@ -16,8 +16,9 @@ class WeatherDay extends React.Component {
     return <div text='black'><Card.Title>Weather Forecast:</Card.Title><ListGroup>{data.map((item, index) => <ListGroup.Item key={index}>{item.date}<br></br>{item.highTemp} c<br></br>{item.lowTemp} c<br></br>{item.description}</ListGroup.Item>)}</ListGroup></div>
   }
 
+
   render() {
-    return(
+    return (
       <>
         {this.forecastRender()}
       </>

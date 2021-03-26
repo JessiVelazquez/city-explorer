@@ -1,3 +1,4 @@
+//Imports
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +8,7 @@ import Error from './error.js';
 import Weather from './Weather.js';
 import './App.css';
 
+//Component Class
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -22,8 +24,6 @@ class App extends React.Component{
   }
 
   getWeatherInfo = async(e) => {
-    // const SERVER = 'https://jessi301d72cityexplorerapi.herokuapp.com/';
-    // const SERVER = 'http://localhost:3001';
     const forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.searchQuery}`);
     const forecastArray = forecast.data;
     this.setState({ weatherForecast: forecastArray });
@@ -54,16 +54,14 @@ class App extends React.Component{
     return(
       <>
         <center>
-        <h1 className="Object" >Welcome to City Explorer.</h1>
-        <h6 className="Object" >Serving you all your forecast and movie needs since 2021.</h6>
+        <h1 className="Object" id="title" >Welcome to City Explorer.</h1>
+        <h6 className="Object" id="title" >Serving you all your forecast and movie needs since 2021.</h6>
         <form className="Object" onSubmit={this.getLocationInfo}>
           <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="enter a city"/>
           <button type="submit">Explore!</button>
         </form>
         </center>
-        <div>
-          <p></p>
-        </div>
+
         {this.state.displayResults &&
           <center>
           <Card className="Render" bg='dark' text='white' style={{ width: '40rem' }}>
@@ -79,14 +77,15 @@ class App extends React.Component{
               <Weather weatherForecast={this.state.weatherForecast} getWeatherInfo={this.getWeatherInfo}/>
             </Card.Body>
           </Card>
-          <footer>
+          <footer id="title">
             &copy;Jessi Velazquez, LocationIQ, Weatherbit
           </footer>
           </center>
         }
+
         {this.state.hasError &&
           <>
-            <center>
+            <center id="title">
             <Error handleError={this.state.hasError}></Error>
             </center>
           </>
@@ -98,5 +97,6 @@ class App extends React.Component{
 
 }
 
+//Exports
 export default App;
 
