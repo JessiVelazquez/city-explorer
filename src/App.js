@@ -1,13 +1,14 @@
+//Imports
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
-// import Button from 'react-bootstrap/Button';
 import Map from './map.js';
 import Error from './error.js';
-import Forecast from './forecast.js';
-// import './App.css';
+import Weather from './Weather.js';
+import './App.css';
 
+//Component Class
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -23,11 +24,8 @@ class App extends React.Component{
   }
 
   getWeatherInfo = async(e) => {
-    // const SERVER = 'https://jessi301d72cityexplorerapi.herokuapp.com/';
-    const SERVER = 'http://localhost:3001';
-    const forecast = await axios.get(`${SERVER}/weather?city_name=${this.state.searchQuery}`);
+    const forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.searchQuery}`);
     const forecastArray = forecast.data;
-    console.log(forecastArray);
     this.setState({ weatherForecast: forecastArray });
   }
   
@@ -37,7 +35,6 @@ class App extends React.Component{
     await axios.get(url)
     .then((location) => {
       const locationArray = location.data;
-      console.log(locationArray[0]);
       this.setState({
         location: locationArray[0],
         displayResults: true,
@@ -47,7 +44,6 @@ class App extends React.Component{
       this.getWeatherInfo();
     }) 
     .catch(error => {
-      console.log(error);
       this.setState({ hasError: error })
       this.setState({ displayResults: false });
     })
@@ -55,19 +51,21 @@ class App extends React.Component{
   
 
   render(){
-      console.log('string');
     return(
       <>
-        <h1>City Explorer</h1>
-        <form onSubmit={this.getLocationInfo}>
+        <center>
+        <h1 className="Object" id="title" >Welcome to City Explorer.</h1>
+        <h6 className="Object" id="title" >Serving you all your forecast and movie needs since 2021.</h6>
+        <form className="Object" onSubmit={this.getLocationInfo}>
           <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="enter a city"/>
           <button type="submit">Explore!</button>
         </form>
-        <div>
-          <p></p>
-        </div>
+        </center>
+
         {this.state.displayResults &&
-          <Card bg='dark' text='white' style={{ width: '22rem' }}>
+          <center>
+          <Card className="Render" bg='dark' text='white' style={{ width: '40rem' }}>
+            <Map className="Render" imageSrc={this.state.imgSrc}/>
             <Card.Body>
               <Card.Title>{this.state.location.display_name}</Card.Title>
               <Card.Text>
@@ -76,14 +74,20 @@ class App extends React.Component{
               <Card.Text>
                 long: {this.state.location.lon}
               </Card.Text>
-              <Forecast weatherForecast={this.state.weatherForecast} getWeatherInfo={this.getWeatherInfo}/>
+              <Weather weatherForecast={this.state.weatherForecast} getWeatherInfo={this.getWeatherInfo}/>
             </Card.Body>
-            <Map imageSrc={this.state.imgSrc}/>
           </Card>
+          <footer id="title">
+            &copy;Jessi Velazquez, LocationIQ, Weatherbit
+          </footer>
+          </center>
         }
+
         {this.state.hasError &&
           <>
+            <center id="title">
             <Error handleError={this.state.hasError}></Error>
+            </center>
           </>
         }  
         
@@ -93,5 +97,6 @@ class App extends React.Component{
 
 }
 
+//Exports
 export default App;
 
