@@ -1,3 +1,20 @@
+body {
+  background-color: rgb(247, 249, 208);
+}
+
+.Object {
+  margin: 2rem 2rem 2rem 2rem;
+}
+
+.Render {
+  margin: 2rem 2rem 2rem 2rem;
+}
+
+.cardstuff {
+  color: #1d2129;
+}
+
+
 .App {
   text-align: center;
 }

@@ -53,16 +53,21 @@ class App extends React.Component{
   render(){
     return(
       <>
-        <h1>City Explorer</h1>
-        <form onSubmit={this.getLocationInfo}>
+        <center>
+        <h1 className="Object" >Welcome to City Explorer.</h1>
+        <h6 className="Object" >Serving you all your forecast and movie needs since 2021.</h6>
+        <form className="Object" onSubmit={this.getLocationInfo}>
           <input onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="enter a city"/>
           <button type="submit">Explore!</button>
         </form>
+        </center>
         <div>
           <p></p>
         </div>
         {this.state.displayResults &&
-          <Card bg='dark' text='black' style={{ width: '22rem' }}>
+          <center>
+          <Card className="Render" bg='dark' text='white' style={{ width: '40rem' }}>
+            <Map className="Render" imageSrc={this.state.imgSrc}/>
             <Card.Body>
               <Card.Title>{this.state.location.display_name}</Card.Title>
               <Card.Text>
@@ -73,12 +78,17 @@ class App extends React.Component{
               </Card.Text>
               <Weather weatherForecast={this.state.weatherForecast} getWeatherInfo={this.getWeatherInfo}/>
             </Card.Body>
-            <Map imageSrc={this.state.imgSrc}/>
           </Card>
+          <footer>
+            &copy;Jessi Velazquez, LocationIQ, Weatherbit
+          </footer>
+          </center>
         }
         {this.state.hasError &&
           <>
+            <center>
             <Error handleError={this.state.hasError}></Error>
+            </center>
           </>
         }  
         

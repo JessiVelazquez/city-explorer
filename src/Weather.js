@@ -8,12 +8,12 @@ class Weather extends React.Component {
 
   render() {
     return (
-      <Card style={{ width: '19.1rem' }}
+      <Card className="cardstuff" style={{ width: '19.1rem' }}
         bg="secondary"
         text="black"
       >
-        <Card.Body>
-            <WeatherDay 
+        <Card.Body style={{ width: '19.1rem' }} horizontal="md" >
+            <WeatherDay className="cardstuffinner"
             weatherForecast={this.props.weatherForecast} 
             getWeatherInfo={this.props.getWeatherInfo}
             />
