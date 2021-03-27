@@ -13,7 +13,7 @@ class Movie extends React.Component {
 
   movieRender() {
     const data = this.props.movie;
-    console.log('dat', data);
+    // console.log('dat', data);
     return <div className="cardstuff" text='black'><Card.Title>Movies:</Card.Title><ListGroup>{data.map((item, index) => <ListGroup.Item key={index}>{item.title}<br></br>{item.popularity}<br></br>{item.overview}</ListGroup.Item>)}</ListGroup></div>
   }
 

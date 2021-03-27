@@ -33,7 +33,6 @@ class App extends React.Component{
 
   getMovieInfo = async(e) => {
     const movie = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${this.state.searchQuery}`);
-    console.log('mov', movie);
     const movieArray = movie.data;
     this.setState({ movie: movieArray });
   }
@@ -51,6 +50,7 @@ class App extends React.Component{
         imgSrc: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${locationArray[0].lat},${locationArray[0].lon}&zoom=13` 
       });
       this.getWeatherInfo();
+      this.getMovieInfo();
     }) 
     .catch(error => {
       this.setState({ hasError: error })
