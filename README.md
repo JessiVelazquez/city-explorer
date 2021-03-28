@@ -1,7 +1,7 @@
 # city-explorer
 
 **Author**: Jessi Velazquez
-**Version**: 1.3.0 
+**Version**: 1.4.0 
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
@@ -26,6 +26,8 @@ This is an app developed for users who want to quickly view a map of a city of t
 03-24-2021 11:13pm - Application now pulls location and weather data from API and renders both on bootstrap card. Both front and back end are deployed to Netlify and Heroku, but deplopyed back end does not send weather data to front end. It works when nodemon is running for the server side.
 
 03-25-2021 11:07pm - Application now is now styled on the front end, and weather data is now rendered in a nested React component. Code has also been refactored and cleaned - both front and back ends.
+
+03-28-2021 4:02pm - Application now function with a cache on the weather back end and uses inMemoryDB() on the movies back end. Site is successfully deployed, and server is running off of Heroku.
 
 ## Credit and Collaborations
 Data flow diagram co-developed with Peter Staker.
@@ -67,4 +69,29 @@ Finish time: 7:45pm
 Actual time needed to complete: 2.25 hours
 
 
-adding test to do oan ACP
+
+Name of feature: Refactor Weather Back End to Match Demo Code
+
+Estimate of time needed to complete: 6 hours
+
+Start time: 4:30pm Friday
+
+Finish time: 8:30pm Friday
+
+Start time: 1:00pm Saturday
+
+Finish time: 5:30pm Saturday
+
+Actual time needed to complete: 8.5 hours
+
+
+
+Name of Feature: Refactor Movies Back end to match demo code
+
+Estimate of time needed to complete: 6 hours
+
+Start time: 12:30pm Sunday
+
+Finish time: 4:00pm Friday
+
+Actual time needed to complete: 3.5 hours
