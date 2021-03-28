@@ -26,9 +26,12 @@ class App extends React.Component{
   }
 
   getWeatherInfo = async(e) => {
-    const forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.searchQuery}`);
+    const forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}`);
+    console.log('forecast@@@@@', forecast.data);
     const forecastArray = forecast.data;
+    // console.log('%%%%%array', forecastArray);
     this.setState({ weatherForecast: forecastArray });
+    console.log('stateweather----------', this.state.weatherForecast);
   }
 
   getMovieInfo = async(e) => {
@@ -37,11 +40,13 @@ class App extends React.Component{
     this.setState({ movie: movieArray });
   }
   
-  async getLocationInfo(e) {
+  getLocationInfo = async(e) => {
     e.preventDefault();
+    console.log('statesearch', this.state.searchQuery);
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${this.state.searchQuery}&format=json`;
     await axios.get(url)
     .then((location) => {
+      console.log('locdata', location.data);
       const locationArray = location.data;
       this.setState({
         location: locationArray[0],
