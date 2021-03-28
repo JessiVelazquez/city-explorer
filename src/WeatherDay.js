@@ -18,8 +18,6 @@ class WeatherDay extends React.Component {
     
     render() {
     const data = this.props.weatherForecast;
-    console.log('weatherDay=====', this.props.weatherForecast);
-    console.log('data-----------', data);
     return (
       <>
         {!data ? '' : (
